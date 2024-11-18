@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, redirect, url_for, send_file,render_t
 import os
 
 from flashcard_generator import generate
-# from utils.your_script import process_pdf  # Adjust this import if needed
 
 app = Flask(__name__)
 
