@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Flashcards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        async function handleUpload() {
+            const formData = new FormData(document.getElementById('uploadForm'));
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                const downloadButton = document.getElementById('downloadButton');
+                downloadButton.href = data.download_url;
+                downloadButton.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PDF to Flashcards Converter</h1>
+            <p>Turn your PDFs into flashcards quickly and efficiently.</p>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Upload Your PDF</h2>
+            <!-- <form action="/upload" method="POST" enctype="multipart/form-data"> -->
+            <form id="uploadForm" onsubmit="event.preventDefault(); handleUpload();" enctype="multipart/form-data">
+
+                <input type="file" name="file" accept=".pdf" required>
+                <button type="submit">Convert to Flashcards</button>
+            </form>
+            <p></p>
+            <a id="downloadButton" href="#" style="display: none;" download>Download Flashcards CSV</a>
+
+        </div>
+        <div class="container tutorial-section">
+            <h2>How to Convert PDF to Anki Flashcards – A Simple Tutorial</h2>
+            <div class="steps">
+                <div class="step">
+                    <h3>Step 1: Upload Your PDF</h3>
+                    <p>Select your PDF file using the upload form above. Ensure your document is clean and well-formatted.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 2: Process the PDF</h3>
+                    <p>Once uploaded, our tool will automatically extract key information and convert it into a structured CSV file.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Import to Anki</h3>
+                    <p>Download the CSV file and use Anki's import feature to create custom flashcards for efficient learning.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Sweta Vooda , Georgia Tech. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

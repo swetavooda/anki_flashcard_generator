@@ -105,7 +105,7 @@ def export_flashcards_to_csv(flashcards, output_file):
     print(f"Flashcards saved to {output_file}")
 
 # Main function to run the workflow
-def main(pdf_path, output_file):
+def generate(pdf_path, output_file):
     # Step 1: Parse the PDF file
     parsed_text = parse_pdf(pdf_path)
     
@@ -114,8 +114,3 @@ def main(pdf_path, output_file):
     
     # Step 3: Export flashcards to CSV (Anki-compatible format)
     export_flashcards_to_csv(flashcards, output_file)
-
-# Example usage
-pdf_path = "test.pdf"  # Path to your course material PDF
-output_file = "anki_flashcards.csv"  # Path where the flashcards will be saved
-main(pdf_path, output_file)
