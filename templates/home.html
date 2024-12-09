@@ -8,6 +8,13 @@
     <script>
         async function handleUpload() {
             const formData = new FormData(document.getElementById('uploadForm'));
+            const difficulty = document.getElementById('difficulty').value;
+            const flashcardType = document.querySelector('input[name="flashcardType"]:checked').value;
+
+            // Append to form data
+            formData.append('difficulty', difficulty);
+            formData.append('reverse', flashcardType === 'reversed');
+
             const response = await fetch('/upload', {
                 method: 'POST',
                 body: formData
@@ -33,7 +40,19 @@
             <h2>Upload Your PDF</h2>
             <!-- <form action="/upload" method="POST" enctype="multipart/form-data"> -->
             <form id="uploadForm" onsubmit="event.preventDefault(); handleUpload();" enctype="multipart/form-data">
-
+                <label for="difficulty">Select Difficulty:</label>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <br><br>
+                <label for="flashcardType">Select Flashcard Type:</label><br>
+                <input type="radio" id="regular" name="flashcardType" value="regular" checked>
+                <label for="regular">Regular</label><br>
+                <input type="radio" id="reversed" name="flashcardType" value="reversed">
+                <label for="reversed">Reversible</label>
+                <br><br>
                 <input type="file" name="file" accept=".pdf" required>
                 <button type="submit">Convert to Flashcards</button>
             </form>
@@ -49,11 +68,15 @@
                     <p>Select your PDF file using the upload form above. Ensure your document is clean and well-formatted.</p>
                 </div>
                 <div class="step">
-                    <h3>Step 2: Process the PDF</h3>
+                    <h3>Step 2: Upload Your PDF</h3>
+                    <p>Select the difficulty level and Flashcard type in the form. Difficulty level is used to generate the flashcard question with given difficulty; You can also generate reversible cards for Anki by selecting the Reversible option under Flashcards Type</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Process the PDF</h3>
                     <p>Once uploaded, our tool will automatically extract key information and convert it into a structured CSV file.</p>
                 </div>
                 <div class="step">
-                    <h3>Step 3: Import to Anki</h3>
+                    <h3>Step 4: Import to Anki</h3>
                     <p>Download the CSV file and use Anki's import feature to create custom flashcards for efficient learning.</p>
                 </div>
             </div>
