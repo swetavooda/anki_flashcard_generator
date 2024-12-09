@@ -39,6 +39,11 @@ The **AI-Powered Flashcard Generator** automates the creation of flashcards comp
    ```bash
    pip install -r requirements.txt
    ```
+4. **Set Environment Variables**:
+   Set your OpenAI API key in the `.env` file:
+   ```env
+   OPENAI_API_KEY=<your-openai-api-key>
+   ```
 
 ---
 
@@ -72,7 +77,7 @@ The **AI-Powered Flashcard Generator** automates the creation of flashcards comp
 ---
 
 #### **Development Setup**
-1. **Environment Variables**:
+1. **[IMPORTANT] Environment Variables**:
    Set your OpenAI API key in the `.env` file:
    ```env
    OPENAI_API_KEY=<your-openai-api-key>
@@ -80,11 +85,10 @@ The **AI-Powered Flashcard Generator** automates the creation of flashcards comp
 
 2. **Folder Structure**:
    ```
-   flashcard-generator/
+   flashcard-generator/code
    ├── app.py             # Main Flask app
    ├── templates/         # HTML templates for the web interface
    ├── static/            # CSS and JavaScript files
-   ├── utils/             # Helper scripts for parsing and AI integration
    ├── uploads/           # Uploaded PDF files
    ├── output/            # Generated CSV files
    └── requirements.txt   # Dependencies
